@@ -35,9 +35,26 @@ A Retrieval-Augmented Generation (RAG) chatbot built on [Flowise](https://flowis
 ## Preprocess CSV File
 After Preprocessing the csv file i got some new json file which has some useful information about the csv data. These file extracts the relevant information from the existing csv file such as aggregation, grouping and classification of supplier function using the crieteria given.
 
-| File | Description |
+| File Name | Description |
 |---|---|
-| `
+| `supplier_tiers_rag.jsonl` | Section 2 tier classification (Tier-1/2/3 or Below Tier-3) per supplier, based on spend, compliance, OTD, and defect rate. |
+| `otd_by_supplier_rag.jsonl` | Section 3.1 on-time delivery rate per supplier, evaluated against the supplier's assigned-tier OTD floor (93/84/75%). |
+| `defect_by_supplier_rag.jsonl` | Section 3.2 defect rate per supplier vs. tier maximum, including the >8% single-shipment hold/RCA flag. |
+| `leadtime_by_supplier_rag.jsonl` | Section 3.3 lead-time compliance per supplier, flagging suppliers above the 50-day ELTRP review threshold. |
+| `compliance_by_supplier_rag.jsonl` | Section 3.4 compliance-score floor checks per supplier, flagging SWL (<60) and follow-up-audit (<70) status. |
+| `otd_penalties_rag.jsonl` | Section 4.1 OTD penalty assessments per supplier-quarter, with tier-specific penalty rates, dollar amounts, and CAP triggers. |
+| `volume_rebate_rag.jsonl` | Section 4.2 Tier-1 volume-rebate eligibility per supplier-year, with the 2.5% rebate amount or the specific failing criteria. |
+| `defect_escalation_rag.jsonl` | Section 4.3 defect penalty escalation per supplier-quarter (4% consecutive-quarter surcharge and $15k Quality Containment Fees). |
+| `risk_levels_rag.jsonl` | Section 5.1 risk-level classification (Low/Medium/High) per supplier from disruption flags and compliance, with computed vs. reported risk. |
+| `escalations_rag.jsonl` | Section 5.2 CPO escalation events per supplier-quarter, triggered by two consecutive High-risk quarters. |
+| `concentration_risk_rag.jsonl` | Section 5.3 portfolio-level region (>45%) and country (>25%) spend-concentration checks, plus a summary record. |
+| `sustainability_rag.jsonl` | Section 6.1 sustainability-score floor checks per supplier vs. tier minimum (80/60/45), flagging SIP requirements. |
+| `certifications_rag.jsonl` | Section 6.2 per-supplier certification compliance, listing held, required, and missing mandatory certs (plus advisory end-use certs). |
+| `certification_matrix_rag.jsonl` | Section 8 reference records for each certification in the Approved Certification Matrix (definition, scope, holder count). |
+| `audit_frequency_rag.jsonl` | Section 7.1 audit-cadence and overdue status per supplier, with the evaluation anchor date and disruption spot-audit flags. |
+| `audit_scores_rag.jsonl` | Section 7.2 compliance-score records per supplier plus the weighted-composite scoring methodology and follow-up-audit triggers. |
+| `disruption_response_rag.jsonl` | Section 9 disruption response level (1/2/3) per supplier with safety-stock and alternate-supplier actions, plus a levels-reference record. |
+| `alternate_suppliers_rag.jsonl` | Section 10 alternate-supplier eligibility per supplier against the four activation conditions, plus the policy-vs-data discrepancy note. |
 
 ## ⚙️ Chunk Configurations Tested
 
